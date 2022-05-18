@@ -1,5 +1,6 @@
 package com.cts.stockdata.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cts.stockdata.model.CompanyDetails;
+import com.cts.stockdata.model.StockPrice;
 import com.cts.stockdata.stockdatacontroller.StockDataController;
 @RestController
 @RequestMapping("/api/v1.0")
@@ -51,5 +53,19 @@ public class StockInfoController  {
 		return new ResponseEntity<CompanyDetails>(cd1,HttpStatus.OK);
 	}
 	
+	@GetMapping("/market/stock/get/{companycode}/{startdate}/{enddate}")
+	public ResponseEntity<List<StockPrice>> getAllCompanyPriceList(@PathVariable String companycode,@PathVariable Date startdate,@PathVariable Date enddate){
+		List<StockPrice> filterSP;
+		List<CompanyDetails> companyDetails=(List<CompanyDetails>) stockDataController.getAllData();
+		List<CompanyDetails> cd=companyDetails.stream().filter(i->i.getCode().equals(companycode)).collect(Collectors.toList());
+		if(cd.size()>0) {
+			List<StockPrice> stockPrices=cd.get(0).getStockPrice();
+			filterSP=stockPrices.stream()
+					.filter(i->i.getUpdatedTime().after(startdate) && i.getUpdatedTime().before(enddate) ).collect(Collectors.toList());
+		}else {
+			throw new RuntimeException("Company doesn't exists!");
+		}
+		return new ResponseEntity<List<StockPrice>>(filterSP,HttpStatus.OK);
+	}
 
 }
