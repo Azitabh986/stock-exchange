@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+h4{
+    text-align: center;
+}
+.alignmentForm{
+    padding-left: 20%;
+    padding-right: 20%;
+    background-color: lightgray;
+    box-shadow: black;
+}
+input {
+    width: 100%;
+    padding: 10px 8px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #000;
+    border-radius: 8px;
+  }
+  input:hover{
+    border: 2px solid red;
+  }

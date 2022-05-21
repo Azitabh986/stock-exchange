@@ -1,0 +1,14 @@
+<div class="alignmentForm">
+    <h4  class="alert alert-primary" role="alert">User Signup </h4>
+<marquee>Please enter all the details and click submit. A mail will be triggered to your mail for check your identity.</marquee>
+<form  [formGroup]="registration" (ngSubmit)="onSubmit()">
+    <label>Username</label>
+    <input type="text" placeholder="Username" formControlName="username" />
+    <label>Password</label>
+    <input type="text" placeholder="Password" formControlName="password" />
+    <label>Email</label>
+    <input type="text" placeholder="Email" formControlName="email" />
+    <button class="btn btn-primary" >Submit</button>
+</form>
+
+</div>
