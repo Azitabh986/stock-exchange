@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -54,7 +55,7 @@ public class StockInfoController  {
 	}
 	
 	@GetMapping("/market/stock/get/{companycode}/{startdate}/{enddate}")
-	public ResponseEntity<List<StockPrice>> getAllCompanyPriceList(@PathVariable String companycode,@PathVariable Date startdate,@PathVariable Date enddate){
+	public ResponseEntity<List<StockPrice>> getAllCompanyPriceList(@PathVariable("companycode") String companycode,@PathVariable("startdate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startdate,@DateTimeFormat(pattern = "yyyy-MM-dd")@PathVariable("enddate") Date enddate){
 		List<StockPrice> filterSP;
 		List<CompanyDetails> companyDetails=(List<CompanyDetails>) stockDataController.getAllData();
 		List<CompanyDetails> cd=companyDetails.stream().filter(i->i.getCode().equals(companycode)).collect(Collectors.toList());
