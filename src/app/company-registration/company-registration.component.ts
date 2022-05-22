@@ -37,11 +37,11 @@ export class CompanyRegistrationComponent implements OnInit {
         .subscribe(res=>{
             console.log(res);
             this.SpinnerService.hide();
-        },
-        (error)=>{
-          console.log(error);
-          this.SpinnerService.hide();
         }
+        // (error)=>{
+        //   console.log(error);
+        //   this.SpinnerService.hide();
+        // }
         
         )
        

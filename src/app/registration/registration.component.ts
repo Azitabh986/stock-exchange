@@ -16,7 +16,7 @@ export class RegistrationComponent implements OnInit {
   showEmailText:string="Don't have account.";
   registration = new FormGroup({
     username: new FormControl('',Validators.required),
-    email: new FormControl('',),
+    email: new FormControl('',[Validators.required,Validators.email]),
     password:new FormControl('',[Validators.required,Validators.minLength(8)])
   });
   constructor(private httpService:HttpService,private SpinnerService: NgxSpinnerService) { }
@@ -24,21 +24,14 @@ export class RegistrationComponent implements OnInit {
   ngOnInit(): void {
   }
   onSubmit(){
-    // this.showOtp=!this.showOtp;
     this.showEmail?this.showOtp=true:this.showOtp=false
     this.SpinnerService.show();
-    console.log(this.f.valid)
     let loginRequest:LoginRequest=new LoginRequest(this.registration.value.username,this.registration.value.password);
-    // let reqBody=JSON.stringify(loginRequest);
    if(!this.showEmail){
     this.httpService.authenicateUser(loginRequest)
     .subscribe(res=>{
-      // console.log("Respose got: "+JSON.stringify(res))
       sessionStorage.setItem("Bearer",res?.accessToken);
       this.SpinnerService.hide();
-    },
-    (error)=>{
-      console.log("error got: "+error)
     })
    }else{
      this.SpinnerService.hide();
@@ -50,9 +43,6 @@ export class RegistrationComponent implements OnInit {
     this.httpService.sendMail(emailBody).subscribe(res=>{
       console.log(res);
     },
-    (error)=>{
-
-    }
     )
   }
   enableEmail(){
