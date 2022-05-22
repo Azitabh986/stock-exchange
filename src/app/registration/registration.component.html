@@ -1,14 +1,33 @@
 <div class="alignmentForm" *ngIf="!this.showOtp; else notShowOtp">
     <h4  class="alert alert-primary" role="alert">User Signup </h4>
 <marquee>Please enter all the details and click submit. A mail will be triggered to your mail for check your identity.</marquee>
-<form  [formGroup]="registration" (ngSubmit)="onSubmit()">
-    <label>Username</label>
+
+
+<form  [formGroup]="registration" (ngSubmit)="onSubmit()" >
+    <label>Username<span *ngIf="f.username.errors?.required">*</span></label>
     <input type="text" placeholder="Username" formControlName="username" />
-    <label>Password</label>
-    <input type="text" placeholder="Password" formControlName="password" />
-    <label [hidden]="!this.showEmail">Email</label>
+
+    <div *ngIf="f.username.touched && f.username.invalid" class="alert alert-danger">
+      <div *ngIf="f.username.errors && f.username.errors.required">Username is required.</div>
+  </div>
+    
+    <label>Password<span *ngIf="f.password.errors?.required">*</span></label>
+    <input type="password" placeholder="Password" formControlName="password" />
+
+    <div *ngIf="f.password.touched && f.password.invalid" class="alert alert-danger">
+      <div *ngIf="f.password.errors && f.password.errors.required">password is required.</div>
+      <div *ngIf="f.password.errors && f.password.errors.minlength">Password must be of 8 characters</div>
+  </div>
+
+    <label [hidden]="!this.showEmail">Email<span *ngIf="f.email.errors?.required">*</span></label>
     <input [hidden]="!this.showEmail" type="text" placeholder="Email" formControlName="email" />
+    
+    <div *ngIf="f.email.touched && f.email.invalid" class="alert alert-danger">
+      <div *ngIf="f.email.errors && f.email.errors.required">Email is required.</div>
+      <div *ngIf="f.email.errors && f.email.errors.email">Please, enter valid email address.</div>
+  </div>
     <button class="btn btn-primary" >Next</button>
+    <!-- [disabled]="f.valid"  -->
     <a  class="anchorClass" role="alert" (click)="enableEmail()">{{this.showEmailText}} </a>
 </form>
 </div>

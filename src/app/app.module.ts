@@ -11,12 +11,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegistrationComponent } from './registration/registration.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CompanyRegistrationComponent } from './company-registration/company-registration.component';
+import { AuthService } from './service/auth.service';
+import { AuthGuard } from './guard/auth.guard';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    CompanyRegistrationComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +32,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     NgxSpinnerModule  
   ],
-  providers: [],
+  providers: [AuthService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

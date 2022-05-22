@@ -16,8 +16,8 @@ export class RegistrationComponent implements OnInit {
   showEmailText:string="Don't have account.";
   registration = new FormGroup({
     username: new FormControl('',Validators.required),
-    email: new FormControl('',Validators.required),
-    password:new FormControl('',Validators.required)
+    email: new FormControl('',),
+    password:new FormControl('',[Validators.required,Validators.minLength(8)])
   });
   constructor(private httpService:HttpService,private SpinnerService: NgxSpinnerService) { }
 
@@ -25,14 +25,15 @@ export class RegistrationComponent implements OnInit {
   }
   onSubmit(){
     // this.showOtp=!this.showOtp;
-    this.showEmail?this.showOtp=true:this.showOtp=false;
+    this.showEmail?this.showOtp=true:this.showOtp=false
     this.SpinnerService.show();
+    console.log(this.f.valid)
     let loginRequest:LoginRequest=new LoginRequest(this.registration.value.username,this.registration.value.password);
     // let reqBody=JSON.stringify(loginRequest);
    if(!this.showEmail){
     this.httpService.authenicateUser(loginRequest)
     .subscribe(res=>{
-      console.log("Respose got: "+JSON.stringify(res))
+      // console.log("Respose got: "+JSON.stringify(res))
       sessionStorage.setItem("Bearer",res?.accessToken);
       this.SpinnerService.hide();
     },
@@ -55,7 +56,14 @@ export class RegistrationComponent implements OnInit {
     )
   }
   enableEmail(){
+  
     this.showEmail=!this.showEmail;
-    !this.showEmail?this.showEmailText="Don't have account.":this.showEmailText="Go to login"
+    !this.showEmail?this.showEmailText="Don't have account.":this.showEmailText="Go to login";
+    // if(this.showEmail){
+    //   this.registration.controls['email'].setValidators([Validators.required,Validators.email]);
+    // }
+  }
+  get f(){
+    return this.registration.controls;
   }
 }

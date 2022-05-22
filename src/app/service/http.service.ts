@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { CompanyDetails } from '../object-model/company.model';
 import { EmailBody, LoginRequest } from '../object-model/email.model';
 
 @Injectable({
@@ -25,6 +26,15 @@ export class HttpService {
   }
   authenicateUser(loginRequest:LoginRequest):Observable<any>{
     return this.httpClient.post(this.host+'/api/v1.0/auth/login',loginRequest);
+  }
+
+  saveCompanyDetails(companyDetails:CompanyDetails):Observable<any>{
+  var headers_object = new HttpHeaders().set("Authorization", "Bearer " + sessionStorage.getItem('Bearer'));
+    const httpOptions = {
+      headers: headers_object
+    };
+    console.log("header options: ",httpOptions)
+    return this.httpClient.post(this.host+'/api/v1.0/market/company/register',companyDetails,httpOptions);
   }
   
 

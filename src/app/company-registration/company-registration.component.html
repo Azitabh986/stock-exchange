@@ -1,0 +1,49 @@
+<h4  class="alert alert-primary" role="alert">Company Registration </h4>
+<div>
+    <form [formGroup]="companyRegistration" (ngSubmit)="onSubmit()">
+        <label>Company Code<span *ngIf="f.code.errors?.required">*</span></label>
+        <input type="text" formControlName="code" placeholder="Company Code" />
+        <div *ngIf="f.code.touched && f.code.invalid" class="alert alert-danger">
+            <div *ngIf="f.code.errors && f.code.errors.required">Company Code is required.</div>
+        </div>
+
+        <label>Company Name<span *ngIf="f.name.errors?.required">*</span></label>
+        <input type="text" formControlName="name" placeholder="Company Name" />
+        <div *ngIf="f.name.touched && f.name.invalid" class="alert alert-danger">
+            <div *ngIf="f.name.errors && f.name.errors.required">Company name is required.</div>
+        </div>
+
+        <label>Company CEO Name<span *ngIf="f.ceo.errors?.required">*</span></label>
+        <input type="text" formControlName="ceo" placeholder="Company CEO Name" />
+        <div *ngIf="f.ceo.touched && f.ceo.invalid" class="alert alert-danger">
+            <div *ngIf="f.ceo.errors && f.ceo.errors.required">Company CEO name is required.</div>
+        </div>
+
+        <label>Company Trunover<span *ngIf="f.trunOver.errors?.required">*</span></label>
+        <input type="number" formControlName="trunOver" placeholder="Company Trunover Name" />
+        <div *ngIf="f.trunOver.touched && f.trunOver.invalid" class="alert alert-danger">
+            <div *ngIf="f.trunOver.errors && f.trunOver.errors.required">Company trunOver name is required.</div>
+        </div>
+
+        <label>Company Website<span *ngIf="f.website.errors?.required">*</span></label>
+        <input type="text" formControlName="website" placeholder="Company Website Name" />
+        <div *ngIf="f.website.touched && f.website.invalid" class="alert alert-danger">
+            <div *ngIf="f.website.errors && f.website.errors.required">Company Website name is required.</div>
+        </div>
+        <label>Select Stock Type<span *ngIf="f.stockExchange.errors?.required">*</span></label>
+        <select formControlName="stockExchange" class="form-control">
+            <option disabled>Choose Stock </option>
+            <option *ngFor="let s of stockExchanges">{{s}}</option>
+        </select>
+
+        <button class="btn btn-warning" style="margin-top: 2%;" >Save Company Details</button>
+    </form>
+</div>
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#004085"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
