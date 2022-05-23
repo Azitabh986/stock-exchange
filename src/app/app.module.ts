@@ -15,13 +15,15 @@ import { CompanyRegistrationComponent } from './company-registration/company-reg
 import { AuthService } from './service/auth.service';
 import { AuthGuard } from './guard/auth.guard';
 import { HttpErrorInterceptor } from './http-interceptor/http-error.interceptor';
+import { PopupComponent } from './popup/popup.component';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
     RegistrationComponent,
-    CompanyRegistrationComponent
+    CompanyRegistrationComponent,
+    PopupComponent
   ],
   imports: [
     BrowserModule,

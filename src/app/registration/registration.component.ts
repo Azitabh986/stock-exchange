@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { EmailBody, LoginRequest } from '../object-model/email.model';
 import { HttpService } from '../service/http.service';
@@ -19,7 +20,7 @@ export class RegistrationComponent implements OnInit {
     email: new FormControl('',[Validators.required,Validators.email]),
     password:new FormControl('',[Validators.required,Validators.minLength(8)])
   });
-  constructor(private httpService:HttpService,private SpinnerService: NgxSpinnerService) { }
+  constructor(private httpService:HttpService,private SpinnerService: NgxSpinnerService,private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -31,6 +32,7 @@ export class RegistrationComponent implements OnInit {
     this.httpService.authenicateUser(loginRequest)
     .subscribe(res=>{
       sessionStorage.setItem("Bearer",res?.accessToken);
+      this.router.navigate(['/home']);
       this.SpinnerService.hide();
     })
    }else{

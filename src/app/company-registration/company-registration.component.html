@@ -1,3 +1,4 @@
+<div class="alignmentForm">
 <h4  class="alert alert-primary" role="alert">Company Registration </h4>
 <div>
     <form [formGroup]="companyRegistration" (ngSubmit)="onSubmit()">
@@ -22,7 +23,7 @@
         <label>Company Trunover<span *ngIf="f.trunOver.errors?.required">*</span></label>
         <input type="number" formControlName="trunOver" placeholder="Company Trunover Name" />
         <div *ngIf="f.trunOver.touched && f.trunOver.invalid" class="alert alert-danger">
-            <div *ngIf="f.trunOver.errors && f.trunOver.errors.required">Company trunOver name is required.</div>
+            <div *ngIf="f.trunOver.errors && f.trunOver.errors.required">Company trunOver must be grater than 10CR</div>
         </div>
 
         <label>Company Website<span *ngIf="f.website.errors?.required">*</span></label>
@@ -38,6 +39,7 @@
 
         <button class="btn btn-warning" style="margin-top: 2%;" >Save Company Details</button>
     </form>
+</div>
 </div>
 <ngx-spinner
   bdColor="rgba(51,51,51,0.8)"

@@ -9,11 +9,12 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError} from 'rxjs/operators';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { AuthService } from '../service/auth.service';
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
 
-  constructor(private SpinnerService: NgxSpinnerService) {}
+  constructor(private SpinnerService: NgxSpinnerService,private authService:AuthService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     console.log("Error",next,'request',request)
@@ -21,11 +22,10 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     .pipe(
       retry(1),
       catchError((error: HttpErrorResponse) => {
-        // if (error.status === 401) {
-        //   console.log(error)
-        // } else {
-          if(error.error?.info)
-            alert(error.error?.info)
+        console.log(JSON.stringify(error))
+          if(error.status==400)
+          this.authService.setErroMsg(error.error?.description);
+            // alert(error.error?.info)
           else
             alert("Something went wrong! Please try again.")
           this.SpinnerService.hide();
