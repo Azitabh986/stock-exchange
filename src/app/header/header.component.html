@@ -8,7 +8,12 @@
               <li *ngIf="!logindisabled"><a [routerLink]="['/login']">Login</a></li>
               <li *ngIf="logindisabled"><a (click)="logout()">Logout</a></li>
               <li><a [routerLink]="['/company-register']">company Register</a></li>
-              
+              <li><span>Company Code</span></li>
+              <li>
+                <select [(ngModel)]="selectCompanyCode" class="form-control">
+                    <option disabled>Company names</option>
+                    <option *ngFor="let s of this.companyName">{{s?.name}}</option>
+                </select></li> 
           </ul>
         </div>
       </nav>

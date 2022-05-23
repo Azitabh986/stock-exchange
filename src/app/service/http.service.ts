@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { CompanyRegistrationComponent } from '../company-registration/company-registration.component';
 import { CompanyDetails } from '../object-model/company.model';
 import { EmailBody, LoginRequest } from '../object-model/email.model';
 
@@ -10,6 +11,7 @@ import { EmailBody, LoginRequest } from '../object-model/email.model';
 export class HttpService {
   host:any='http://localhost:8081';
   host1:any='http://localhost:8082';
+ 
    
      
   constructor(private httpClient:HttpClient) {
@@ -17,7 +19,7 @@ export class HttpService {
    }
 
   // signup
-  getAllUsers():Observable<any>{
+  getAllCompanyDetails():Observable<any>{
     
     return this.httpClient.get(this.host+'/api/v1.0/market/company/getall');
   }
@@ -40,7 +42,15 @@ export class HttpService {
   }
 
   searchCompanyDetailsByCompanyCode(companyCode:any){
-    return this.httpClient.get(this.host1+'/api/v1.0/market/company/info/'+companyCode);
+    var headers_object = new HttpHeaders().set('Access-Control-Allow-Origin', '*'
+    );
+    headers_object.set("Content-Type","application/json")
+    headers_object.set("Access-Control-Allow-Methods","'GET,POST,OPTIONS,DELETE,PUT")
+    headers_object.set("Accept","application/json")
+   const  httpOptions = {
+      headers: headers_object
+    };
+    return this.httpClient.get(this.host1+'/api/v1.0/market/company/info/'+companyCode,httpOptions);
   }
   
 

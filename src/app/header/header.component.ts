@@ -12,6 +12,8 @@ import { HttpService } from '../service/http.service';
 export class HeaderComponent implements OnInit {
   logindisabled:boolean=false;
   companyCode:string|undefined;
+  companyName:any[]=[];
+  selectCompanyCode:any;
   constructor(private authService:AuthService,private httpService:HttpService, private SpinnerService: NgxSpinnerService,private router:Router) { }
   
 
@@ -22,17 +24,25 @@ export class HeaderComponent implements OnInit {
         .subscribe(res=>{
           this.logindisabled=res;
         })
+        this.httpService.getAllCompanyDetails()
+        .subscribe((resp:any[]) => {
+          console.log(resp);
+          this.companyName=resp;
+          this.SpinnerService.hide();
+        }
+        );
   }
   searchDetails(){
     this.SpinnerService.show();
     this.router.navigate(['/home']);
-    this.httpService.searchCompanyDetailsByCompanyCode(this.companyCode)
-        .subscribe(res=>{
-          this.SpinnerService.hide();
-          console.log(res)
-        },(error)=>{
-          this.companyCode=undefined;
-        })
+    // this.httpService.searchCompanyDetailsByCompanyCode(this.companyCode)
+    //     .subscribe(res=>{
+    //       this.SpinnerService.hide();
+    //       console.log(res)
+    //     },(error)=>{
+    //       this.companyCode=undefined;
+    //     })
+    this.authService.setCompanyCode(this.companyCode);
   }
   logout(){
     sessionStorage.removeItem('Bearer');
