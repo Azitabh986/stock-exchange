@@ -16,6 +16,8 @@ import { AuthService } from './service/auth.service';
 import { AuthGuard } from './guard/auth.guard';
 import { HttpErrorInterceptor } from './http-interceptor/http-error.interceptor';
 import { PopupComponent } from './popup/popup.component';
+import { FilterDatePipe } from './pipe/filter-date.pipe';
+import { FilterTimePipe } from './pipe/filter-time.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +25,9 @@ import { PopupComponent } from './popup/popup.component';
     HomeComponent,
     RegistrationComponent,
     CompanyRegistrationComponent,
-    PopupComponent
+    PopupComponent,
+    FilterDatePipe,
+    FilterTimePipe
   ],
   imports: [
     BrowserModule,

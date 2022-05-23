@@ -24,7 +24,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         console.log(JSON.stringify(error))
           if(error.status==400){
-            this.authService.setErroMsg(error.error?.description+'Please try again!!');
+            this.authService.setErroMsg(error.error?.info+'Please try again!!');
           }
            
           else if(error.status==401)

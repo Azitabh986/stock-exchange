@@ -1,34 +1,27 @@
 <div>
-  <div *ngIf="this.filteredData?.length>0">
-    <div>Company Code: {{this.filteredData[0]?.code}}</div>
-    <div>Company Name: {{this.filteredData[0]?.name}}</div>
+  <div class="alignCss" *ngIf="this.filteredData?.length>0">
+    <span class="textCss">Company Code:</span>
+    <span class="textCss"> {{this.filteredData[0]?.code}}</span>
+  </div>
+  <div class="alignCss" *ngIf="this.filteredData?.length>0">
+    <span class="textCss">Company Name:</span>
+    <span class="textCss"> {{this.filteredData[0]?.name}}</span>
   </div>
     <table class="table table-hover table-dark">
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">Stock Price</th>
+            <th scope="col">Date</th>
+            <th scope="col">Time</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>{{filteredData | json}}</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
+        <tbody *ngIf="this.filteredData">
+          <tr *ngFor="let stockPrice of this.filteredData[0]?.stockPrice; let i as index">
+            <td>{{i}}</td>
+            <td>{{stockPrice?.stockPrice}}</td>
+            <td>{{stockPrice?.updatedTime}}</td>
+            <td>{{stockPrice?.updatedTime}}</td>>
           </tr>
         </tbody>
       </table>

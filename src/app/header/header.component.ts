@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Subscription } from 'rxjs';
 import { AuthService } from '../service/auth.service';
 import { HttpService } from '../service/http.service';
 
@@ -9,22 +10,29 @@ import { HttpService } from '../service/http.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit,OnDestroy {
   logindisabled:boolean=false;
   companyCode:string|undefined;
   companyName:any[]=[];
   selectCompanyCode:any;
+  loginEn:Subscription | undefined;
+  apiCall:Subscription | undefined;
   constructor(private authService:AuthService,private httpService:HttpService, private SpinnerService: NgxSpinnerService,private router:Router) { }
   
 
   ngOnInit(): void {
     if(sessionStorage.getItem('Bearer'))
       this.logindisabled=true;
-    this.authService.getLogoutEnabled()
+    this.loginEn=this.authService.getLogoutEnabled()
         .subscribe(res=>{
           this.logindisabled=res;
+          this.SpinnerService.hide();
         })
-        this.httpService.getAllCompanyDetails()
+        this.callNewApi();
+       
+  }
+  callNewApi(){
+    this.apiCall=this.httpService.getAllCompanyDetails()
         .subscribe((resp:any[]) => {
           console.log(resp);
           this.companyName=resp;
@@ -48,6 +56,10 @@ export class HeaderComponent implements OnInit {
     sessionStorage.removeItem('Bearer');
     this.authService.setErroMsg("Successfully Logout");
     this.logindisabled=false;
+  }
+  ngOnDestroy(){
+    this.loginEn?.unsubscribe();
+    this.apiCall?.unsubscribe();
   }
 
 }
