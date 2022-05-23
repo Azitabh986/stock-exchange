@@ -16,6 +16,8 @@ export class HeaderComponent implements OnInit {
   
 
   ngOnInit(): void {
+    if(sessionStorage.getItem('Bearer'))
+      this.logindisabled=true;
     this.authService.getLogoutEnabled()
         .subscribe(res=>{
           this.logindisabled=res;
@@ -28,11 +30,14 @@ export class HeaderComponent implements OnInit {
         .subscribe(res=>{
           this.SpinnerService.hide();
           console.log(res)
+        },(error)=>{
+          this.companyCode=undefined;
         })
   }
   logout(){
     sessionStorage.removeItem('Bearer');
     this.authService.setErroMsg("Successfully Logout");
+    this.logindisabled=false;
   }
 
 }

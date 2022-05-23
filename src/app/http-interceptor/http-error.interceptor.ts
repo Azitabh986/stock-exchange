@@ -23,8 +23,10 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       retry(1),
       catchError((error: HttpErrorResponse) => {
         console.log(JSON.stringify(error))
-          if(error.status==400)
-            this.authService.setErroMsg(error.error?.description);
+          if(error.status==400){
+            this.authService.setErroMsg(error.error?.description+'Please try again!!');
+          }
+           
           else if(error.status==401)
             this.authService.setErroMsg("Unauthorized Url");
           else
