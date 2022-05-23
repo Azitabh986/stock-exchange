@@ -1,4 +1,11 @@
 a{
     cursor: pointer;
     color: #28a745 !important;
+    border: 1px solid #28a745;
+    padding: 10px;
+    border-radius: 5px;
+}
+a:hover{
+    background-color: #28a745;
+    color: #fff !important;
 }
