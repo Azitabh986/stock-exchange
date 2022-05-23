@@ -48,3 +48,16 @@ label{
 .headerCss{
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
+button{
+  background-color: #fff !important;
+  color: #28a745 !important;
+  padding: 10px;
+  border: 1px solid #28a745 !important;
+  border-radius: 5px;
+  font-family: noto_sans;
+  font-weight: 900 !important;
+}
+button:hover{
+  background-color: #28a745 !important;
+  color: #fff !important;
+}

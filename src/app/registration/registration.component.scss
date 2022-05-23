@@ -1,5 +1,5 @@
 marquee{
-    background-color: crimson;
+    background-color: #28a745 ;
     color: #fff;
     font-size: 16px;
     font-family: noto_sans;
@@ -7,4 +7,21 @@ marquee{
 .anchorClass{
     cursor: pointer;
     margin-left: 20%;
+    color: #28a745;
+    font-weight: 900;
+    font-family: noto_sans;
+    padding: 10px;
+    border: 1px solid #28a745;
+    border-radius: 5px;
+}
+.anchorClass:hover{
+    cursor: pointer;
+    margin-left: 20%;
+    color: #fff;
+    font-weight: 900;
+    font-family: noto_sans;
+    padding: 10px;
+    border: 1px solid #28a745;
+    border-radius: 5px;
+    background-color: #28a745;
 }

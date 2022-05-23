@@ -9,7 +9,11 @@ import { EmailBody, LoginRequest } from '../object-model/email.model';
 })
 export class HttpService {
   host:any='http://localhost:8081';
-  
+  host1:any='http://localhost:8082';
+   headers_object:HttpHeaders = new HttpHeaders().set("Authorization", "Bearer " + sessionStorage.getItem('Bearer'));
+     httpOptions = {
+      headers: this.headers_object
+    };
   constructor(private httpClient:HttpClient) {
     
    }
@@ -29,12 +33,12 @@ export class HttpService {
   }
 
   saveCompanyDetails(companyDetails:CompanyDetails):Observable<any>{
-  var headers_object = new HttpHeaders().set("Authorization", "Bearer " + sessionStorage.getItem('Bearer'));
-    const httpOptions = {
-      headers: headers_object
-    };
-    console.log("header options: ",httpOptions)
-    return this.httpClient.post(this.host+'/api/v1.0/market/company/register',companyDetails,httpOptions);
+    return this.httpClient.post(this.host+'/api/v1.0/market/company/register',companyDetails,this.httpOptions);
+  }
+
+  searchCompanyDetailsByCompanyCode(companyCode:any){
+    console.log(companyCode)
+    return this.httpClient.get(this.host1+'/api/v1.0/market/company/info/'+companyCode);
   }
   
 

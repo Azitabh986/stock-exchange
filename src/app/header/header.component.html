@@ -13,8 +13,16 @@
         </div>
       </nav>
       <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Company Code" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <input class="form-control mr-sm-2" type="search" [(ngModel)]="companyCode" [ngModelOptions]="{standalone: true}" placeholder="Company Code" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" (click)="searchDetails()" type="submit">Search</button>
       </form>
     </nav>
     <app-popup></app-popup>
+    <ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#004085"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner> 
