@@ -23,7 +23,8 @@
         <label>Company Trunover<span *ngIf="f.trunOver.errors?.required">*</span></label>
         <input type="number" formControlName="trunOver" placeholder="Company Trunover Name" />
         <div *ngIf="f.trunOver.touched && f.trunOver.invalid" class="alert alert-danger">
-            <div *ngIf="f.trunOver.errors && f.trunOver.errors.required">Company trunOver must be grater than 10CR</div>
+            <div *ngIf="f.trunOver.errors && f.trunOver.errors.required">Company trunOver is required.</div>
+            <div *ngIf="f.trunOver.errors && f.trunOver.errors.min">Company trunOver must be grater than 10CR</div>
         </div>
 
         <label>Company Website<span *ngIf="f.website.errors?.required">*</span></label>

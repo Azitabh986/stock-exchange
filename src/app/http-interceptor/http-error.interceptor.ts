@@ -24,10 +24,11 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         console.log(JSON.stringify(error))
           if(error.status==400)
-          this.authService.setErroMsg(error.error?.description);
-            // alert(error.error?.info)
+            this.authService.setErroMsg(error.error?.description);
+          else if(error.status==401)
+            this.authService.setErroMsg("Unauthorized Url");
           else
-            alert("Something went wrong! Please try again.")
+            this.authService.setErroMsg("Something went wrong! Please try again.")
           this.SpinnerService.hide();
           return throwError(error);
         // }

@@ -6,6 +6,7 @@ import { Observable, Subject } from 'rxjs';
 })
 export class AuthService {
   private errorMsg=new Subject<any>();
+  private checkLogoutEnabled=new Subject<boolean>();
   constructor() { }
   isLoggedIn():boolean{
     if(sessionStorage.getItem('Bearer')!=null)
@@ -19,5 +20,11 @@ export class AuthService {
   getErrorMsg(): Observable<any> {
     return this.errorMsg.asObservable();
 }
+  setCheckLogoutEnabled(val:boolean){
+    this.checkLogoutEnabled.next(val);
+  }
+  getLogoutEnabled(){
+    return this.checkLogoutEnabled.asObservable();
+  }
  
 }
