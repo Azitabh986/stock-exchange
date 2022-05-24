@@ -17,11 +17,11 @@
           </tr>
         </thead>
         <tbody *ngIf="this.filteredData">
-          <tr *ngFor="let stockPrice of this.filteredData[0]?.stockPrice; let i as index">
+          <tr *ngFor="let stockPrice of this.filteredData[0]?.stockPrice; let i = index">
             <td>{{i}}</td>
             <td>{{stockPrice?.stockPrice}}</td>
-            <td>{{stockPrice?.updatedTime}}</td>
-            <td>{{stockPrice?.updatedTime}}</td>>
+            <td>{{stockPrice?.updatedTime | filterDate:'date'}}</td>
+            <td>{{stockPrice?.updatedTime | filterDate:'time'}}</td>
           </tr>
         </tbody>
       </table>

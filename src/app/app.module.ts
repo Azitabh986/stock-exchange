@@ -17,7 +17,8 @@ import { AuthGuard } from './guard/auth.guard';
 import { HttpErrorInterceptor } from './http-interceptor/http-error.interceptor';
 import { PopupComponent } from './popup/popup.component';
 import { FilterDatePipe } from './pipe/filter-date.pipe';
-import { FilterTimePipe } from './pipe/filter-time.pipe';
+import { StockIntroComponent } from './stock-intro/stock-intro.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,7 @@ import { FilterTimePipe } from './pipe/filter-time.pipe';
     CompanyRegistrationComponent,
     PopupComponent,
     FilterDatePipe,
-    FilterTimePipe
+    StockIntroComponent
   ],
   imports: [
     BrowserModule,

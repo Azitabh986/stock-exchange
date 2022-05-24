@@ -12,7 +12,7 @@ import { HttpService } from '../service/http.service';
 })
 export class HeaderComponent implements OnInit,OnDestroy {
   logindisabled:boolean=false;
-  companyCode:string|undefined;
+  companyCode:string='';
   companyName:any[]=[];
   selectCompanyCode:any;
   loginEn:Subscription | undefined;
@@ -21,6 +21,8 @@ export class HeaderComponent implements OnInit,OnDestroy {
   
 
   ngOnInit(): void {
+    this.SpinnerService.show();
+    this.callNewApi();
     if(sessionStorage.getItem('Bearer'))
       this.logindisabled=true;
     this.loginEn=this.authService.getLogoutEnabled()
@@ -28,7 +30,7 @@ export class HeaderComponent implements OnInit,OnDestroy {
           this.logindisabled=res;
           this.SpinnerService.hide();
         })
-        this.callNewApi();
+       
        
   }
   callNewApi(){
@@ -41,16 +43,13 @@ export class HeaderComponent implements OnInit,OnDestroy {
         );
   }
   searchDetails(){
-    this.SpinnerService.show();
-    this.router.navigate(['/home']);
-    // this.httpService.searchCompanyDetailsByCompanyCode(this.companyCode)
-    //     .subscribe(res=>{
-    //       this.SpinnerService.hide();
-    //       console.log(res)
-    //     },(error)=>{
-    //       this.companyCode=undefined;
-    //     })
-    this.authService.setCompanyCode(this.companyCode);
+    this.router.navigate(['/search']);
+    sessionStorage.setItem('companyCode',this.companyCode);
+    if(sessionStorage.getItem('companyCode')){
+      this.router.navigate(['/home']);
+      this.SpinnerService.show();
+    }
+     
   }
   logout(){
     sessionStorage.removeItem('Bearer');
@@ -58,8 +57,8 @@ export class HeaderComponent implements OnInit,OnDestroy {
     this.logindisabled=false;
   }
   ngOnDestroy(){
-    this.loginEn?.unsubscribe();
-    this.apiCall?.unsubscribe();
+    // this.loginEn?.unsubscribe();
+    // this.apiCall?.unsubscribe();
   }
 
 }

@@ -17,33 +17,39 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.SpinnerService.show();
-    this.authService.getCompanyCode()
-        .subscribe(res=>{
-            this.companyCode=res;
-            this.callApi()
-        })       
+    if(sessionStorage.getItem('companyCode')){
+      this.companyCode=sessionStorage.getItem('companyCode');
+      this.callApi(this.companyCode);
+    }
+
+    // this.authService.getCompanyCode()
+    //     .subscribe(res=>{
+    //       console.log("Searched company COde: ",res)
+    //         this.companyCode=res;
+    //         
+    //     })      
+        this.SpinnerService.hide(); 
   }
-  filterArray(){
+  filterArray(code:string){
     console.log("Inside Filtered")
     if( this.data.length>0){
-      this.filteredData= this.data.filter(i=>i?.name==this.companyCode || i?.code== this.companyCode); 
+      this.filteredData= this.data.filter(i=>i?.name==code || i?.code== code); 
     }else{
       this.authService.setErroMsg("No result Found.");
     }
     this.SpinnerService.hide();
   }
-  callApi(){
-    if(this.companyCode){
+  callApi(code:string){
+    
+    if(code){
+      this.SpinnerService.show();
       this.httpService.getAllCompanyDetails()
       .subscribe((resp:any[]) => {
         this.data=resp;
-        this.filterArray();
+        this.filterArray(code);
       }
       );
      
     } 
   }
-}
-export interface StockExchange{
-  
 }
