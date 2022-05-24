@@ -43,22 +43,29 @@ export class HeaderComponent implements OnInit,OnDestroy {
         );
   }
   searchDetails(){
-    this.router.navigate(['/search']);
+    this.SpinnerService.show();
+    this.router.navigate(['/intro']);
+   setTimeout(()=>{
     sessionStorage.setItem('companyCode',this.companyCode);
     if(sessionStorage.getItem('companyCode')){
       this.router.navigate(['/home']);
-      this.SpinnerService.show();
+      // this.SpinnerService.show();
     }
+   },1000)
+    
      
   }
   logout(){
     sessionStorage.removeItem('Bearer');
     this.authService.setErroMsg("Successfully Logout");
     this.logindisabled=false;
+    this.router.navigate(['intro'])
   }
   ngOnDestroy(){
     // this.loginEn?.unsubscribe();
     // this.apiCall?.unsubscribe();
   }
-
+  getSelectedValue(){
+    console.log("Selected value",this.selectCompanyCode)
+  }
 }

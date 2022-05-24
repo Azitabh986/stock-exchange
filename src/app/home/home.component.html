@@ -1,11 +1,11 @@
 <div>
-  <div class="alignCss" *ngIf="this.filteredData?.length>0">
+  <div class="alignCss" *ngIf="this.filteredData">
     <span class="textCss">Company Code:</span>
-    <span class="textCss"> {{this.filteredData[0]?.code}}</span>
+    <span class="textCss"> {{this.filteredData?.code}}</span>
   </div>
-  <div class="alignCss" *ngIf="this.filteredData?.length>0">
+  <div class="alignCss" *ngIf="this.filteredData">
     <span class="textCss">Company Name:</span>
-    <span class="textCss"> {{this.filteredData[0]?.name}}</span>
+    <span class="textCss"> {{this.filteredData?.name}}</span>
   </div>
     <table class="table table-hover table-dark">
         <thead>
@@ -17,7 +17,7 @@
           </tr>
         </thead>
         <tbody *ngIf="this.filteredData">
-          <tr *ngFor="let stockPrice of this.filteredData[0]?.stockPrice; let i = index">
+          <tr *ngFor="let stockPrice of this.filteredData?.stockPrice; let i = index">
             <td>{{i}}</td>
             <td>{{stockPrice?.stockPrice}}</td>
             <td>{{stockPrice?.updatedTime | filterDate:'date'}}</td>
@@ -25,6 +25,18 @@
           </tr>
         </tbody>
       </table>
+      <div class="alignCss" *ngIf="this.filteredData">
+        <span class="textCss">MIN:</span>
+        <span class="textCss"> {{min}}</span>
+      </div>
+      <div class="alignCss" *ngIf="this.filteredData">
+        <span class="textCss">MAX:</span>
+        <span class="textCss"> {{max}}</span>
+      </div>
+      <div class="alignCss" *ngIf="this.filteredData">
+        <span class="textCss">AVG:</span>
+        <span class="textCss"> {{this.avg}}</span>
+      </div>
 </div>
 <ngx-spinner
   bdColor="#ccc"

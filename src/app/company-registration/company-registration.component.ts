@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CompanyDetails } from '../object-model/company.model';
 import { AuthService } from '../service/auth.service';
@@ -20,7 +21,9 @@ export class CompanyRegistrationComponent implements OnInit {
     website:new FormControl('',[Validators.required]),
     stockExchange:new FormControl('',Validators.required)
   });
-  constructor(private httpService:HttpService,private SpinnerService: NgxSpinnerService,private authService:AuthService) { }
+  constructor(private httpService:HttpService,
+    private SpinnerService: NgxSpinnerService,private authService:AuthService,
+    private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -36,6 +39,7 @@ export class CompanyRegistrationComponent implements OnInit {
     this.httpService.saveCompanyDetails(companyDetails)
         .subscribe(res=>{
            this.authService.setErroMsg("Successfully saved the company details");
+           this.router.navigate(['search']);
             this.SpinnerService.hide();
         })
        

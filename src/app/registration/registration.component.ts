@@ -12,6 +12,7 @@ import { HttpService } from '../service/http.service';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
+  buttonText:any='Login';
   showOtp:boolean=false;
   otp:any;
   showEmail:boolean=false;
@@ -60,6 +61,7 @@ export class RegistrationComponent implements OnInit {
   
     this.showEmail=!this.showEmail;
     !this.showEmail?this.showEmailText="Don't have account.":this.showEmailText="Go to login";
+    this.showEmail?this.buttonText="Next":this.buttonText="Login";
     // if(this.showEmail){
     //   this.registration.controls['email'].setValidators([Validators.required,Validators.email]);
     // }

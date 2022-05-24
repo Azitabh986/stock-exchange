@@ -12,6 +12,10 @@ export class HomeComponent implements OnInit {
   companyCode:any;
   data:any[]=[];
   filteredData:any;
+  min: any;
+  max: any;
+  prices:number[]=[];
+  avg: any;
   constructor(private SpinnerService: NgxSpinnerService,private authService:AuthService,
       private httpService:HttpService ) { }
 
@@ -19,37 +23,47 @@ export class HomeComponent implements OnInit {
     this.SpinnerService.show();
     if(sessionStorage.getItem('companyCode')){
       this.companyCode=sessionStorage.getItem('companyCode');
-      this.callApi(this.companyCode);
-    }
+      this.httpService.searchCompanyDetailsByCompanyCode(this.companyCode)
+                      .subscribe(res=>{
+                        this.filteredData=res;
+                        if(this.filteredData?.stockPrice?.length>0){
+                          this.filteredData?.stockPrice.forEach((i: { stockPrice: number; })=>{
+                              this.prices.push(i?.stockPrice);
+                          })
+                        }
+                        this.min= Math.min(...this.prices);
+                        this.max= Math.max(...this.prices);
 
-    // this.authService.getCompanyCode()
-    //     .subscribe(res=>{
-    //       console.log("Searched company COde: ",res)
-    //         this.companyCode=res;
-    //         
-    //     })      
-        this.SpinnerService.hide(); 
+                        const sum = this.prices.reduce((a, b) => a + b, 0);
+                        console.log("Sum Value: ",sum)
+                        const average = (sum / this.prices.length) || 0;
+                        this.avg=average;
+                        this.SpinnerService.hide(); 
+                      })
+    }   
+       
+        
   }
-  filterArray(code:string){
-    console.log("Inside Filtered")
-    if( this.data.length>0){
-      this.filteredData= this.data.filter(i=>i?.name==code || i?.code== code); 
-    }else{
-      this.authService.setErroMsg("No result Found.");
-    }
-    this.SpinnerService.hide();
-  }
-  callApi(code:string){
+  // filterArray(code:string){
+  //   console.log("Inside Filtered")
+  //   if( this.data.length>0){
+  //     this.filteredData= this.data.filter(i=>i?.name==code || i?.code== code); 
+  //   }else{
+  //     this.authService.setErroMsg("No result Found.");
+  //   }
+  //   this.SpinnerService.hide();
+  // }
+  // callApi(code:string){
     
-    if(code){
-      this.SpinnerService.show();
-      this.httpService.getAllCompanyDetails()
-      .subscribe((resp:any[]) => {
-        this.data=resp;
-        this.filterArray(code);
-      }
-      );
+  //   if(code){
+  //     this.SpinnerService.show();
+  //     this.httpService.getAllCompanyDetails()
+  //     .subscribe((resp:any[]) => {
+  //       this.data=resp;
+  //       this.filterArray(code);
+  //     }
+  //     );
      
-    } 
-  }
+  //   } 
+  // }
 }

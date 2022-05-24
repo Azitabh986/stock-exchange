@@ -50,7 +50,7 @@ export class HttpService {
    const  httpOptions = {
       headers: headers_object
     };
-    return this.httpClient.get(this.host1+'/api/v1.0/market/company/info/'+companyCode,httpOptions);
+    return this.httpClient.get(this.host+'/api/v1.0/market/company/info/'+companyCode);
   }
   
 

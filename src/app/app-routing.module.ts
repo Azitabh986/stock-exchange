@@ -7,13 +7,13 @@ import { RegistrationComponent } from './registration/registration.component';
 import { StockIntroComponent } from './stock-intro/stock-intro.component';
 
 const routes: Routes = [
-  {path:'',component:HomeComponent},
+  {path:'',component:StockIntroComponent},
   {path:'home',component:HomeComponent},
   {path:'login',component:RegistrationComponent},
-  {path:'search',component:StockIntroComponent},
+  {path:'intro',component:StockIntroComponent},
   {path:'',redirectTo:'home',pathMatch:'full'},
   { path: 'company-register', component: CompanyRegistrationComponent, canActivate : [AuthGuard] },
-  {path:'**',component:HomeComponent}
+  {path:'**',component:StockIntroComponent}
 
 ];
 
