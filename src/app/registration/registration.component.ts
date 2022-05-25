@@ -16,6 +16,7 @@ export class RegistrationComponent implements OnInit {
   showOtp:boolean=false;
   otp:any;
   showEmail:boolean=false;
+  userSignup:any='User SignIn';
   showEmailText:string="Don't have account.";
   @Output() loginEnabled = new EventEmitter<boolean>();
   registration = new FormGroup({
@@ -41,6 +42,7 @@ export class RegistrationComponent implements OnInit {
     this.httpService.authenicateUser(loginRequest)
     .subscribe(res=>{
       sessionStorage.setItem("Bearer",res?.accessToken);
+      sessionStorage.setItem("role",res?.roles)
       this.router.navigate(['home']);
       this.authService.setCheckLogoutEnabled(true);
       this.SpinnerService.hide();
@@ -62,6 +64,7 @@ export class RegistrationComponent implements OnInit {
     this.showEmail=!this.showEmail;
     !this.showEmail?this.showEmailText="Don't have account.":this.showEmailText="Go to login";
     this.showEmail?this.buttonText="Next":this.buttonText="Login";
+    this.showEmail?this.userSignup="User Signup":this.userSignup="User SignIN"
     // if(this.showEmail){
     //   this.registration.controls['email'].setValidators([Validators.required,Validators.email]);
     // }

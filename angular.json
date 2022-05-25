@@ -69,6 +69,14 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+            },
+            "qa": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
           },
           "defaultConfiguration": "production"
@@ -81,6 +89,9 @@
             },
             "development": {
               "browserTarget": "stock-exchange:build:development"
+            },
+            "qa": {
+              "browserTarget": "stock-exchange:build:qa"
             }
           },
           "defaultConfiguration": "development"

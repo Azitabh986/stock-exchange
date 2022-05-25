@@ -1,3 +1,4 @@
+{{env | json}}
 <div>
   <div class="alignCss" *ngIf="this.filteredData">
     <span class="textCss">Company Code:</span>
@@ -18,7 +19,7 @@
         </thead>
         <tbody *ngIf="this.filteredData">
           <tr *ngFor="let stockPrice of this.filteredData?.stockPrice; let i = index">
-            <td>{{i}}</td>
+            <td>{{i+1}}</td>
             <td>{{stockPrice?.stockPrice}}</td>
             <td>{{stockPrice?.updatedTime | filterDate:'date'}}</td>
             <td>{{stockPrice?.updatedTime | filterDate:'time'}}</td>

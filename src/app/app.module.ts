@@ -18,6 +18,7 @@ import { HttpErrorInterceptor } from './http-interceptor/http-error.interceptor'
 import { PopupComponent } from './popup/popup.component';
 import { FilterDatePipe } from './pipe/filter-date.pipe';
 import { StockIntroComponent } from './stock-intro/stock-intro.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { StockIntroComponent } from './stock-intro/stock-intro.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    NgxSpinnerModule  
+    NgxSpinnerModule,
+    ChartsModule
   ],
   providers: [{provide:HTTP_INTERCEPTORS,useClass:HttpErrorInterceptor,multi:true},
     AuthService,AuthGuard],
