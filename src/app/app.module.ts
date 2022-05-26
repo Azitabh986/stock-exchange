@@ -19,6 +19,8 @@ import { PopupComponent } from './popup/popup.component';
 import { FilterDatePipe } from './pipe/filter-date.pipe';
 import { StockIntroComponent } from './stock-intro/stock-intro.component';
 import { ChartsModule } from 'ng2-charts';
+import { ChartComponent } from './ui-components/chart/chart.component';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { ChartsModule } from 'ng2-charts';
     CompanyRegistrationComponent,
     PopupComponent,
     FilterDatePipe,
-    StockIntroComponent
+    StockIntroComponent,
+    ChartComponent,
+   
   ],
   imports: [
     BrowserModule,

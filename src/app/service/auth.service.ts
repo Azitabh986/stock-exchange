@@ -8,6 +8,8 @@ export class AuthService {
   private errorMsg=new Subject<any>();
   private checkLogoutEnabled=new Subject<boolean>();
   private companyCode=new Subject<any>();
+  private companyData=new Subject<any[]>();
+
   constructor() { }
   isLoggedIn():boolean{
     if(sessionStorage.getItem('Bearer')!=null)
@@ -32,6 +34,12 @@ export class AuthService {
   }
   getCompanyCode():Observable<any>{
     return this.companyCode.asObservable();
+  }
+  setCompanyData(data:any[]){
+    this.companyData.next(data);
+  }
+  getCompanyData():Observable<any[]>{
+    return this.companyData.asObservable();
   }
  
 }

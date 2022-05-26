@@ -22,7 +22,11 @@ export class HeaderComponent implements OnInit,OnDestroy {
 
   ngOnInit(): void {
     this.SpinnerService.show();
-    this.callNewApi();
+    this.authService.getCompanyData()
+        .subscribe(res=>{
+          this.companyName=res;
+        })
+    // this.callNewApi();
     if(sessionStorage.getItem('Bearer'))
       this.logindisabled=true;
     this.loginEn=this.authService.getLogoutEnabled()
@@ -33,15 +37,15 @@ export class HeaderComponent implements OnInit,OnDestroy {
        
        
   }
-  callNewApi(){
-    this.apiCall=this.httpService.getAllCompanyDetails()
-        .subscribe((resp:any[]) => {
-          console.log(resp);
-          this.companyName=resp;
-          this.SpinnerService.hide();
-        }
-        );
-  }
+  // callNewApi(){
+  //   this.apiCall=this.httpService.getAllCompanyDetails()
+  //       .subscribe((resp:any[]) => {
+  //         console.log(resp);
+  //         this.companyName=resp;
+  //         this.SpinnerService.hide();
+  //       }
+  //       );
+  // }
   searchDetails(){
     this.SpinnerService.show();
     this.router.navigate(['/intro']);

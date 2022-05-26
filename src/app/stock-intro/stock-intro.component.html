@@ -1,15 +1,1 @@
-
-  <div  *ngIf="this.dataFound">
-    <h4  class="alert alert-primary" role="alert">Searching Please Wait a While. </h4>
-    <div style="display: block; width: 400px; height: 400px;">
-        <canvas baseChart 
-          [datasets]="barChartData"
-          [labels]="barChartLabels"
-          [options]="barChartOptions"
-          [plugins]="barChartPlugins"
-          [legend]="barChartLegend"
-          [chartType]="barChartType">
-        </canvas>
-      </div>
-</div>
-  
+<app-chart [comapanyData]="companyName"></app-chart>

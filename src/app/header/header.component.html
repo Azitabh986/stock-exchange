@@ -13,7 +13,7 @@
                 <select [(ngModel)]="selectCompanyCode" (click)= "getSelectedValue()"class="form-control">
                     <option disabled>Company names</option>
                     <option >Select C's names</option>
-                    <option *ngFor="let s of this.companyName">{{s?.name}}</option>
+                    <option *ngFor="let s of this.companyName">{{s?.name | titlecase}}</option>
                 </select></li> 
           </ul>
         </div>
@@ -23,7 +23,7 @@
         <button class="btn btn-outline-success my-2 my-sm-0" (click)="searchDetails()" type="submit">Search</button>
       </form>
     </nav>
-    <app-stock-intro [comapanyData]="companyName"></app-stock-intro>
+
     <app-popup></app-popup>
     <ngx-spinner
     bdColor="#ccc"
