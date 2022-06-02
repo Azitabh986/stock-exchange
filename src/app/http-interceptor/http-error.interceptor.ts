@@ -26,7 +26,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           if(error.status==400){
             this.authService.setErroMsg(error.error?.info+'Please try again!!');
           }
-           
           else if(error.status==401)
             this.authService.setErroMsg("Unauthorized Url");
           else

@@ -20,6 +20,7 @@ import { FilterDatePipe } from './pipe/filter-date.pipe';
 import { StockIntroComponent } from './stock-intro/stock-intro.component';
 import { ChartsModule } from 'ng2-charts';
 import { ChartComponent } from './ui-components/chart/chart.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { ChartComponent } from './ui-components/chart/chart.component';
     FilterDatePipe,
     StockIntroComponent,
     ChartComponent,
+    FooterComponent,
    
   ],
   imports: [

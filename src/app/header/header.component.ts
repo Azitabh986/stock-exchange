@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit,OnDestroy {
   companyCode:string='';
   companyName:any[]=[];
   selectCompanyCode:any;
+  checkRole:boolean=false;
   loginEn:Subscription | undefined;
   apiCall:Subscription | undefined;
   constructor(private authService:AuthService,private httpService:HttpService, private SpinnerService: NgxSpinnerService,private router:Router) { }
@@ -25,6 +26,7 @@ export class HeaderComponent implements OnInit,OnDestroy {
     this.authService.getCompanyData()
         .subscribe(res=>{
           this.companyName=res;
+          console.log("Company Name: ",this.companyName)
         })
     // this.callNewApi();
     if(sessionStorage.getItem('Bearer'))
@@ -34,7 +36,9 @@ export class HeaderComponent implements OnInit,OnDestroy {
           this.logindisabled=res;
           this.SpinnerService.hide();
         })
-       
+        if(sessionStorage.getItem('role')== 'ROLE_ADMIN' || sessionStorage.getItem('role') == 'ROLE_USER')
+        this.checkRole=true;
+        console.log(sessionStorage.getItem('role'))
        
   }
   // callNewApi(){
@@ -71,13 +75,23 @@ export class HeaderComponent implements OnInit,OnDestroy {
     
   }
   ngOnDestroy(){
-    // this.loginEn?.unsubscribe();
-    // this.apiCall?.unsubscribe();
+    this.loginEn?.unsubscribe();
+    this.apiCall?.unsubscribe();
   }
   getSelectedValue(){
-    sessionStorage.setItem('companyName',this.selectCompanyCode)
-    if(sessionStorage.getItem('companyName')&& this.selectCompanyCode)
-    this.searchDetails();
-    console.log("Selected value",this.selectCompanyCode)
+    // sessionStorage.setItem('companyName',this.selectCompanyCode)
+    console.log(this.selectCompanyCode)
+    this.companyName?.forEach(element => {
+      if(element?.name== this.selectCompanyCode){
+        sessionStorage.setItem('companyCode',element?.code);
+        this.searchDetails();
+      }else{
+        console.log("Not matched")
+      }
+      
+    });
+  }
+  showLoader(){
+    this.SpinnerService.show();
   }
 }

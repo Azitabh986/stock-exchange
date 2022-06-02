@@ -52,6 +52,8 @@ export class HttpService {
     };
     return this.httpClient.get(this.host+'/api/v1.0/market/company/info/'+companyCode);
   }
-  
+  searchByCodeAndDate(code:any,startDate:Date,endDate:Date){
+    return this.httpClient.get(this.host+'/api/v1.0/market/stock/get/'+code+'/'+startDate+'/'+endDate);
+  }
 
 }

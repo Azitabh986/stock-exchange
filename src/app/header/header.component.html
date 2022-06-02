@@ -2,12 +2,12 @@
       <nav class="navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" [routerLink]="['/']"><img src="/assets/images/stock-exchange.jpg" height="50px" width="50px" /></a>
+            <a class="navbar-brand" (click)="showLoader()"><img src="/assets/images/stock-exchange.jpg" height="50px" width="50px" /></a>
           </div>
           <ul class="nav navbar-nav">
               <li *ngIf="!logindisabled"><a [routerLink]="['/login']">Login</a></li>
               <li *ngIf="logindisabled"><a (click)="logout()">Logout</a></li>
-              <li><a [routerLink]="['/company-register']">company Register</a></li>
+              <li *ngIf="this.checkRole"><a [routerLink]="['/company-register']">company Register</a></li>
               <li><span>Company Name</span></li>
               <li>
                 <select [(ngModel)]="selectCompanyCode" (click)= "getSelectedValue()"class="form-control">

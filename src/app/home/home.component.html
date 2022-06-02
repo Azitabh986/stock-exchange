@@ -1,4 +1,24 @@
-{{env | json}}
+<h5  class="alert alert-primary" role="alert">Search By Date </h5>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <label>Company Code *</label>
+     <input type="text" [(ngModel)]="this.comapanyCode1" placeholder="Company Code" />
+    </div>
+    <div class="col-sm">
+     <label>Start Date *</label>
+     <input [(ngModel)]="startDate" type="date" />
+    </div>
+    <div class="col-sm">
+      <label>End Date *</label>
+     <input [(ngModel)]="endDate" type="date" />
+    </div>
+    <div class="col-sm">
+      <label></label>
+     <button class="btn btn-primary" style="margin-top: 16%;" (click)="searchByDate()">Search</button>
+    </div>
+  </div>
+</div>
 <div>
   <div class="alignCss" *ngIf="this.filteredData">
     <span class="textCss">Company Code:</span>
@@ -8,7 +28,7 @@
     <span class="textCss">Company Name:</span>
     <span class="textCss"> {{this.filteredData?.name}}</span>
   </div>
-    <table class="table table-hover table-dark">
+    <table class="table table-hover table-dark" *ngIf="this.filteredData?.stockPrice?.length>0; else notPresenet">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -26,18 +46,22 @@
           </tr>
         </tbody>
       </table>
-      <div class="alignCss" *ngIf="this.filteredData">
+      <ng-template #notPresenet>
+        <div class="alert alert-warning">No Stock data is found</div>
+      </ng-template>
+      <div class="alignCss" *ngIf="this.filteredData?.stockPrice?.length>0">
         <span class="textCss">MIN:</span>
         <span class="textCss"> {{min}}</span>
       </div>
-      <div class="alignCss" *ngIf="this.filteredData">
+      <div class="alignCss" *ngIf="this.filteredData?.stockPrice?.length>0">
         <span class="textCss">MAX:</span>
         <span class="textCss"> {{max}}</span>
       </div>
-      <div class="alignCss" *ngIf="this.filteredData">
+      <div class="alignCss" *ngIf="this.filteredData?.stockPrice?.length>0">
         <span class="textCss">AVG:</span>
         <span class="textCss"> {{this.avg}}</span>
       </div>
+      <div style="margin-bottom: 5%;"></div>
 </div>
 <ngx-spinner
   bdColor="#ccc"
