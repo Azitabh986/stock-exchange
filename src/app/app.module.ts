@@ -21,6 +21,7 @@ import { StockIntroComponent } from './stock-intro/stock-intro.component';
 import { ChartsModule } from 'ng2-charts';
 import { ChartComponent } from './ui-components/chart/chart.component';
 import { FooterComponent } from './footer/footer.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { FooterComponent } from './footer/footer.component';
     ReactiveFormsModule,
     FormsModule,
     NgxSpinnerModule,
-    ChartsModule
+    ChartsModule,
+    NgxPaginationModule
   ],
   providers: [{provide:HTTP_INTERCEPTORS,useClass:HttpErrorInterceptor,multi:true},
     AuthService,AuthGuard],

@@ -7,7 +7,7 @@
           <ul class="nav navbar-nav">
               <li *ngIf="!logindisabled"><a [routerLink]="['/login']">Login</a></li>
               <li *ngIf="logindisabled"><a (click)="logout()">Logout</a></li>
-              <li *ngIf="this.checkRole"><a [routerLink]="['/company-register']">company Register</a></li>
+              <li ><a [routerLink]="['/company-register']">company Register</a></li>
               <li><span>Company Name</span></li>
               <li>
                 <select [(ngModel)]="selectCompanyCode" (click)= "getSelectedValue()"class="form-control">

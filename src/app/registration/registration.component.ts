@@ -30,6 +30,7 @@ export class RegistrationComponent implements OnInit {
     private authService:AuthService) { }
 
   ngOnInit(): void {
+    this.SpinnerService.hide();
   }
   checkLogin(val:boolean){
     this.loginEnabled.emit(val);

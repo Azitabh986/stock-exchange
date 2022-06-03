@@ -31,13 +31,17 @@
     <a  class="anchorClass" role="alert" (click)="enableEmail()">{{this.showEmailText}} </a>
 </form>
 </div>
-<ng-template #notShowOtp>
+<ng-template #notShowOtp >
+  <div class="alignmentForm">
     <h4  class="alert alert-primary" role="alert">OTP Authentication </h4>
     <marquee>Please Enter Six digit OTP and submit.</marquee>
     <label>One Time Password</label>
     <input placeholder="OTP" [(ngModel)]="otp" />
     <button class="btn btn-primary" (click)="checkMail()">Authenticate</button>
+  </div>
+    
 </ng-template>
+<div style="margin-bottom: 10%;"></div>
 <ngx-spinner
   bdColor="#ccc"
   size="medium"

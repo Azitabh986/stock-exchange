@@ -8,7 +8,7 @@ import { HttpService } from '../service/http.service';
   styleUrls: ['./stock-intro.component.scss']
 })
 export class StockIntroComponent implements OnInit {
-  
+  p: number = 1;
  companyName:any;
   constructor(private authService:AuthService,private httpService:HttpService,private spinnerService:NgxSpinnerService) { }
   
@@ -17,6 +17,7 @@ export class StockIntroComponent implements OnInit {
     this.httpService.getAllCompanyDetails()
         .subscribe(res=>{
           this.companyName=res;
+          console.log("company name: ",this.companyName)
           this.authService.setCompanyData(res);
           this.spinnerService.hide();
         })

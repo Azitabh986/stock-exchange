@@ -1,1 +1,43 @@
-<app-chart [comapanyData]="companyName"></app-chart>
+
+
+<div class="container">
+    <div class="row">
+      <div class="col-xl">
+        <p>        A stock exchange, securities exchange, or bourse, is an exchange where stockbrokers and traders can buy and sell securities, such as shares of stock, bonds, and other financial instruments. Stock exchanges may also provide facilities for the issue and redemption of such securities and instruments and capital events including the payment of income and dividends.[citation needed] Securities traded on a stock exchange include stock issued by listed companies, unit trusts, derivatives, pooled investment products and bonds. Stock exchanges often function as "continuous auction" markets with buyers and sellers consummating transactions via open outcry at a central location such as the floor of the exchange or by using an electronic trading platform.[1]
+        </p>
+      </div>
+      <div class="col-xl">
+        <app-chart [comapanyData]="companyName"></app-chart>
+      </div>
+      <div class="col-xl">
+        <table class="table table-hover table-dark" *ngIf="this.companyName?.length>0">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Company Name</th>
+              <th scope="col">Company Code</th>
+              <th scope="col">CEO</th>
+              <th scope="col">Stock Type</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="this.companyName">
+            <tr *ngFor="let s of this.companyName  | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+              <td>{{i+1}}</td>
+              <td>{{s?.name}}</td>
+              <td>{{s?.code }}</td>
+              <td>{{s?.ceo | titlecase}}</td>
+              <td>{{s?.stockExchange }}</td>
+            </tr>
+            
+          </tbody>
+         
+        </table>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+  <div style="margin-bottom: 10%;"></div>
+
+ 
+
+  
