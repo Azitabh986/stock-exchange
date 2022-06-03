@@ -1,0 +1,35 @@
+<div *ngIf="checkLogin; else notLoggedIn">
+    <div class="container">
+        <h5  class="alert alert-warning" role="alert">Delete the company details </h5>
+        <div class="row">
+          <div class="col-sm">
+            <label>Company Code *</label>
+           <input type="text" [(ngModel)]="this.comapanyCode" placeholder="Company Code" />
+          </div>
+          <div class="col-sm"> 
+           <button (click)="delete()" class="btn btn-warning customColor" style="margin-top: 7%;">Delete</button>
+          </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h5  class="alert alert-primary" role="alert">Add Stock Price </h5>
+        <div class="row">
+          <div class="col-sm">
+            <label>Company Code *</label>
+           <input type="text" [(ngModel)]="this.comapanyCode1" placeholder="Company Code" />
+          </div>
+          <div class="col-sm">
+            <label>Stock Amount *</label>
+           <input type="number" [(ngModel)]="this.stockAmount" placeholder="Company Code" />
+          </div>
+          <div class="col-sm"> 
+           <button (click)="addStock()" class="btn btn-warning customColornew" style="margin-top: 10.5%;">Add</button>
+          </div>
+        </div>
+    </div>
+    
+</div>
+<ng-template #notLoggedIn>
+    <h5  class="alert alert-warning" role="alert">To access this page please do <a [routerLink]="['/login']">Login</a> </h5>
+</ng-template>

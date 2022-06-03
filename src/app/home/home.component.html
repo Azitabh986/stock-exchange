@@ -38,14 +38,17 @@
           </tr>
         </thead>
         <tbody *ngIf="this.filteredData">
-          <tr *ngFor="let stockPrice of this.filteredData?.stockPrice; let i = index">
-            <td>{{i+1}}</td>
+          <tr *ngFor="let stockPrice of this.filteredData?.stockPrice| paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+            <td>{{((this.p-1)*5)+i+1}}</td>
             <td>{{stockPrice?.stockPrice}}</td>
             <td>{{stockPrice?.updatedTime | filterDate:'date'}}</td>
             <td>{{stockPrice?.updatedTime | filterDate:'time'}}</td>
           </tr>
         </tbody>
       </table>
+      <div style="margin-left: 40%;">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
       <ng-template #notPresenet>
         <div class="alert alert-warning">No Stock data is found</div>
       </ng-template>

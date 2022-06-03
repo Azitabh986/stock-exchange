@@ -9,6 +9,7 @@ import { HttpService } from '../service/http.service';
 })
 export class StockIntroComponent implements OnInit {
   p: number = 1;
+  i:number=(this.p-1)*5;
  companyName:any;
   constructor(private authService:AuthService,private httpService:HttpService,private spinnerService:NgxSpinnerService) { }
   

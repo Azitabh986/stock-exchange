@@ -22,6 +22,7 @@ import { ChartsModule } from 'ng2-charts';
 import { ChartComponent } from './ui-components/chart/chart.component';
 import { FooterComponent } from './footer/footer.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { AdminPageComponent } from './admin-page/admin-page.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     StockIntroComponent,
     ChartComponent,
     FooterComponent,
+    AdminPageComponent,
    
   ],
   imports: [

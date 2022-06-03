@@ -29,6 +29,8 @@ export class CompanyRegistrationComponent implements OnInit {
   }
   onSubmit():void{
     this.SpinnerService.show();
+    if(!this.companyRegistration.value.stockExchange)
+    this.companyRegistration.value.stockExchange='BSE'
     let companyDetails=new CompanyDetails(this.companyRegistration.value.code,
       this.companyRegistration.value.name,
       this.companyRegistration.value.ceo,

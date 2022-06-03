@@ -21,7 +21,8 @@ export class HomeComponent implements OnInit {
   endDate:any;
   prices:number[]=[];
   avg: any;
-  env=environment
+  env=environment;
+  p: number = 1;
   constructor(private SpinnerService: NgxSpinnerService,private authService:AuthService,
       private httpService:HttpService ) { }
 

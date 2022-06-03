@@ -21,8 +21,8 @@
             </tr>
           </thead>
           <tbody *ngIf="this.companyName">
-            <tr *ngFor="let s of this.companyName  | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
-              <td>{{i+1}}</td>
+            <tr *ngFor="let s of this.companyName  | paginate: { itemsPerPage: 5, currentPage: p };let i=index">
+              <td>{{((this.p-1)*5)+i+1}}</td>
               <td>{{s?.name}}</td>
               <td>{{s?.code }}</td>
               <td>{{s?.ceo | titlecase}}</td>
