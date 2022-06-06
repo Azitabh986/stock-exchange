@@ -23,6 +23,7 @@ import { ChartComponent } from './ui-components/chart/chart.component';
 import { FooterComponent } from './footer/footer.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AdminPageComponent } from './admin-page/admin-page.component';
+import { ServerDownComponent } from './server-down/server-down.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
     ChartComponent,
     FooterComponent,
     AdminPageComponent,
+    ServerDownComponent,
    
   ],
   imports: [

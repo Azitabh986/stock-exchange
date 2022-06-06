@@ -5,6 +5,7 @@ import { CompanyRegistrationComponent } from './company-registration/company-reg
 import { AuthGuard } from './guard/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { ServerDownComponent } from './server-down/server-down.component';
 import { StockIntroComponent } from './stock-intro/stock-intro.component';
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path:'login',component:RegistrationComponent},
   {path:'intro',component:StockIntroComponent},
   {path:'admin-page',component:AdminPageComponent},
+  {path:'server-not-found',component:ServerDownComponent},
   {path:'',redirectTo:'home',pathMatch:'full'},
   { path: 'company-register', component: CompanyRegistrationComponent, canActivate : [AuthGuard] },
   {path:'**',component:StockIntroComponent}

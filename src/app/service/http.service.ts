@@ -9,7 +9,7 @@ import { EmailBody, LoginRequest } from '../object-model/email.model';
   providedIn: 'root'
 })
 export class HttpService {
-  host:any='http://ec2-54-166-107-122.compute-1.amazonaws.com:8080';
+  host:any='http://stockexchange-env.eba-ywksamtk.us-east-1.elasticbeanstalk.com';
   host1:any='http://localhost:8082';
  
    
