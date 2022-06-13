@@ -26,7 +26,7 @@ export class StockIntroComponent implements OnInit {
           this.authService.setCompanyData(res);
           this.spinnerService.hide();
         })
-        if(!this.companyName)
+        if(this.companyName?.length<0)
             this.router.navigate(['/server-not-found']);
     // console.log("Inside stock Intro data: ",this.comapanyData)
   }
