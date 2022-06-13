@@ -11,10 +11,10 @@
               <li ><a [routerLink]="['/admin-page']">Admin Control</a></li>
               <li><span>Company Name</span></li>
               <li>
-                <select [(ngModel)]="selectCompanyCode" (click)= "getSelectedValue()"class="form-control">
+                <select [(ngModel)]="selectCompanyCode" class="form-control">
                     <option disabled>Company names</option>
                     <option >Select C's names</option>
-                    <option *ngFor="let s of this.companyName">{{s?.name | titlecase}}</option>
+                    <option *ngFor="let s of this.companyName"><button (click)= "getSelectedValue()">{{s?.name | titlecase}}</button></option>
                 </select></li> 
           </ul>
         </div>

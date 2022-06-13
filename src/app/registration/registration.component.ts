@@ -44,7 +44,7 @@ export class RegistrationComponent implements OnInit {
     .subscribe(res=>{
       sessionStorage.setItem("Bearer",res?.accessToken);
       sessionStorage.setItem("role",res?.roles)
-      this.router.navigate(['home']);
+      this.router.navigate(['intro']);
       this.authService.setCheckLogoutEnabled(true);
       this.SpinnerService.hide();
     })

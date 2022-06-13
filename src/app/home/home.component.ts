@@ -45,6 +45,7 @@ export class HomeComponent implements OnInit {
                         this.avg=average;
                         this.SpinnerService.hide(); 
                       })
+      sessionStorage.removeItem('companyCode');
     }else{
       this.SpinnerService.hide();
     }   
