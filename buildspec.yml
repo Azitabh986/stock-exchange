@@ -6,9 +6,10 @@ phases:
       - npm install
   build:
     commands:
-      - echo Build started on `date`
-      - echo Compiling the dist folder
-      - npm run-script build
+      - echo Installing angular cli...
+      - npm install -g @angular/cli
+      - npm add @angular-devkit/build-angular --dev
+      - npm add @angular-devkit/build-angular --dev
   post_build:
     commands:
       - echo Build completed on `date`
