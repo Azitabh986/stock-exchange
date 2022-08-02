@@ -17,5 +17,11 @@ phases:
 artifacts:
     files:
         - '**/*'
-    base-directory: 'dist*'
+    base-directory: 'dist/**/*'
     discard-paths: yes
+    
+#     artifacts:
+#   files:
+#     - index.html
+#     - dist/**/*
+#     - node_modules/**/*
