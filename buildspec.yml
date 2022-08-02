@@ -15,7 +15,7 @@ phases:
       - echo Build completed on `date`
 # Include only the files required for your application to run.
 artifacts:
-  files:
-    - index.html
-    - dist/**/*
-    - node_modules/**/*
+    files:
+        - '**/*'
+    base-directory: 'dist*'
+    discard-paths: yes
