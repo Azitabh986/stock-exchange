@@ -6,12 +6,10 @@ phases:
       - echo Nothing to do in the pre_build phase...
   build:
     commands:
-      - echo Build started on `date`
-      - mvn clean prepare-package jar:exploded
+      - mvn clean install
   post_build:
     commands:
       - echo Build completed on `date`
-      - mv target/deploy ./
 artifacts:
   files:
-    - deploy/**/*
+    - /**/*
