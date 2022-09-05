@@ -97,7 +97,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-		<finalName>stockexchange</finalName>
+		<finalName>stock-data</finalName>
 	</build>
 
 </project>
