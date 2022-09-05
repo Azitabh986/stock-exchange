@@ -33,13 +33,13 @@ public class StockInfoController  {
 
 	@GetMapping("/market/company/getall")
 	public ResponseEntity<List<CompanyDetails>> getAllCompanyData(){
-		List<CompanyDetails> companyDetails=(List<CompanyDetails>) stockDataController.getAllData();
+		List<CompanyDetails> companyDetails=(List<CompanyDetails>) stockDataController.findAll();
 		return new ResponseEntity<List<CompanyDetails>>(companyDetails,HttpStatus.OK);
 	}
 	
 	@GetMapping("/market/company/info/{companycode}")
-	public ResponseEntity<CompanyDetails> getCompanyDetailsByCompanyCode(@Valid @PathVariable String companycode){
-		List<CompanyDetails> companyDetails=(List<CompanyDetails>) stockDataController.getAllData();
+	public ResponseEntity<?> getCompanyDetailsByCompanyCode( @PathVariable String companycode){
+		List<CompanyDetails> companyDetails=(List<CompanyDetails>) stockDataController.findAll();
 		logger.info("companyDetails:-- "+companyDetails.toString());
 		
 		System.out.println(companyDetails.stream().filter(i->i.getCode() == companycode));
@@ -49,7 +49,7 @@ public class StockInfoController  {
 		if(cd.size()>0) {
 			cd1=cd.get(0);
 		}else {
-			throw new RuntimeException("company code doesn't exits");
+			throw new RuntimeException("Company doesn't exists!");
 		}
 		return new ResponseEntity<CompanyDetails>(cd1,HttpStatus.OK);
 	}
@@ -57,7 +57,7 @@ public class StockInfoController  {
 	@GetMapping("/market/stock/get/{companycode}/{startdate}/{enddate}")
 	public ResponseEntity<List<StockPrice>> getAllCompanyPriceList(@PathVariable("companycode") String companycode,@PathVariable("startdate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startdate,@DateTimeFormat(pattern = "yyyy-MM-dd")@PathVariable("enddate") Date enddate){
 		List<StockPrice> filterSP;
-		List<CompanyDetails> companyDetails=(List<CompanyDetails>) stockDataController.getAllData();
+		List<CompanyDetails> companyDetails=(List<CompanyDetails>) stockDataController.findAll();
 		List<CompanyDetails> cd=companyDetails.stream().filter(i->i.getCode().equals(companycode)).collect(Collectors.toList());
 		if(cd.size()>0) {
 			List<StockPrice> stockPrices=cd.get(0).getStockPrice();
@@ -66,6 +66,8 @@ public class StockInfoController  {
 		}else {
 			throw new RuntimeException("Company doesn't exists!");
 		}
+		if(filterSP.size()==0)
+			throw new RuntimeException("No stock price is found between "+startdate+" and "+enddate);
 		return new ResponseEntity<List<StockPrice>>(filterSP,HttpStatus.OK);
 	}
 

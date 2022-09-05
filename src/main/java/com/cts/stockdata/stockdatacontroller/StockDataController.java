@@ -1,19 +1,20 @@
 package com.cts.stockdata.stockdatacontroller;
 
-import java.util.List;
 
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
+
+
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import com.cts.stockdata.model.CompanyDetails;
 
 
-@CrossOrigin(origins = "*", maxAge = 3600)
-@FeignClient(name = "STOCK-EXCHANGE")
-public interface StockDataController {
+//@Repository
+public interface StockDataController extends JpaRepository<CompanyDetails, Long> {
 	
-	@GetMapping("/api/v1.0/market/company/getall")
-	public List<CompanyDetails> getAllData();
+	@Query(value = "Select * from company_details where code=?1",nativeQuery = true)
+	CompanyDetails findByCode(String code);
+
 }
