@@ -15,7 +15,6 @@ phases:
       - echo build process started now
       - ng build --prod
 artifacts:
-  files:
-    - '**/*'
-    base-directory: 'dist*'
-    discard-path: yes
+  files: '**/*'
+  base-directory: 'dist*'
+  discard-path: yes
