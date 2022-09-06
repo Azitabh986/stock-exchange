@@ -1,8 +1,8 @@
 version: 0.2
 env:
   variables:
-    S3_BUCKET:{{S3_BUCKET}}
-    BUILD_FOLDER:dist
+    S3_BUCKET: {{S3_BUCKET}}
+    BUILD_FOLDER: dist
 phases:
   install:
     runtime-versions:
