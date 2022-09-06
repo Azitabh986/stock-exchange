@@ -1,4 +1,4 @@
 FROM openjdk:8-jdk-alpine
 EXPOSE 8080
-ADD target/stockexchange.jar stockexchange
+ADD target/stock-data.jar stock-data.jar
 ENTRYPOINT ["java","-jar","/stock-data.jar"]
