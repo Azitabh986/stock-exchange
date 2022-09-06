@@ -10,7 +10,7 @@ import { EmailBody, LoginRequest } from '../object-model/email.model';
 })
 export class HttpService {
   host1:any='http://stockexchange-env.eba-ywksamtk.us-east-1.elasticbeanstalk.com';
-  // host:any='http://stockexchangebackend-env.eba-wigfmhpe.us-east-1.elasticbeanstalk.com';
+   host2:any='http://stockexchangebackend-env.eba-wigfmhpe.us-east-1.elasticbeanstalk.com';
   host:any='http://3.82.144.204:8080'
  
    
@@ -37,7 +37,7 @@ export class HttpService {
     return this.httpClient.post(this.host+'/mail',email,{ headers: headers });
   }
   authenicateUser(loginRequest:LoginRequest):Observable<any>{
-    return this.httpClient.post(this.host+'/api/v1.0/auth/login',loginRequest);
+    return this.httpClient.post(this.host2+'/api/v1.0/auth/login',loginRequest);
   }
 
   saveCompanyDetails(companyDetails:CompanyDetails):Observable<any>{
@@ -46,7 +46,7 @@ export class HttpService {
       headers: headers_object
     };
     console.log(httpOptions)
-    return this.httpClient.post(this.host+'/api/v1.0/market/company/register',companyDetails,httpOptions);
+    return this.httpClient.post(this.host2+'/api/v1.0/market/company/register',companyDetails,httpOptions);
   }
 
   searchCompanyDetailsByCompanyCode(companyCode:any){
@@ -75,7 +75,7 @@ export class HttpService {
    const  httpOptions = {
       headers: headers_object
     };
-    return this.httpClient.delete(this.host+'/api/v1.0/market/stock/get/'+comapnyCode,httpOptions);
+    return this.httpClient.delete(this.host2+'/api/v1.0/market/stock/get/'+comapnyCode,httpOptions);
   }
   addStockPrice(price:number,comapnyCode:any){
     const temp="Bearer " + sessionStorage.getItem('Bearer')
@@ -90,7 +90,7 @@ export class HttpService {
    const  httpOptions = {
       headers: headers_object
     };
-    return this.httpClient.post(this.host+'/api/v1.0/market/stock/get/'+comapnyCode,JSON.stringify(price),httpOptions);
+    return this.httpClient.post(this.host2+'/api/v1.0/market/stock/get/'+comapnyCode,JSON.stringify(price),httpOptions);
   }
 
   
