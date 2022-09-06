@@ -36,7 +36,7 @@ export class RegistrationComponent implements OnInit {
     this.loginEnabled.emit(val);
   }
   onSubmit(){
-    this.showEmail?this.showOtp=true:this.showOtp=false
+    // this.showEmail?this.showOtp=true:this.showOtp=false
     this.SpinnerService.show();
     let loginRequest:LoginRequest=new LoginRequest(this.registration.value.username,this.registration.value.password);
    if(!this.showEmail){
@@ -49,6 +49,7 @@ export class RegistrationComponent implements OnInit {
       this.SpinnerService.hide();
     })
    }else{
+     this.checkMail();
      this.SpinnerService.hide();
    }
     console.log(this.registration.value);
@@ -56,6 +57,11 @@ export class RegistrationComponent implements OnInit {
   checkMail(){
     let emailBody=new EmailBody(this.registration.value.email,"","");
     this.httpService.sendMail(emailBody).subscribe(res=>{
+      if(res){
+        this.showOtp=true;
+      }else{
+        this.showOtp=false;
+      }
       console.log(res);
     },
     )

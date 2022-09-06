@@ -9,8 +9,9 @@ import { EmailBody, LoginRequest } from '../object-model/email.model';
   providedIn: 'root'
 })
 export class HttpService {
-  host:any='http://stockexchange-env.eba-ywksamtk.us-east-1.elasticbeanstalk.com';
-  host1:any='http://localhost:8082';
+  host1:any='http://stockexchange-env.eba-ywksamtk.us-east-1.elasticbeanstalk.com';
+  // host:any='http://stockexchangebackend-env.eba-wigfmhpe.us-east-1.elasticbeanstalk.com';
+  host:any='http://3.82.144.204:8080'
  
    
      
@@ -20,13 +21,20 @@ export class HttpService {
 
   // signup
   getAllCompanyDetails():Observable<any>{
-    
-    return this.httpClient.get(this.host+'/api/v1.0/market/company/getall');
+    const headers = {'Content-Type':'application/json', 'Access-Control-Allow-Origin':'*' };
+    return this.httpClient.get(this.host+'/api/v1.0/market/company/getall',{ headers: headers });
   }
 
   sendMail(email:EmailBody):Observable<any>{
-    let headers:HttpHeaders = new HttpHeaders({'Content-Type': 'application/json','Access-Control-Allow-Origin': '*',});
-    return this.httpClient.post(this.host+'/mail',email,{headers});
+  //   const headers= new HttpHeaders()
+  // .set('content-type', 'application/json')
+  // .set('Access-Control-Allow-Origin', '*');
+  // let headers = new Headers();
+  //       headers.append('Content-Type','application/json');
+  //       headers.append('Access-Control-Allow-Origin','*');
+        const headers = {'Content-Type':'application/json', 'Access-Control-Allow-Origin':'*' };
+        // let options = new RequestOptions({headers:headers});
+    return this.httpClient.post(this.host+'/mail',email,{ headers: headers });
   }
   authenicateUser(loginRequest:LoginRequest):Observable<any>{
     return this.httpClient.post(this.host+'/api/v1.0/auth/login',loginRequest);
@@ -85,4 +93,5 @@ export class HttpService {
     return this.httpClient.post(this.host+'/api/v1.0/market/stock/get/'+comapnyCode,JSON.stringify(price),httpOptions);
   }
 
+  
 }
