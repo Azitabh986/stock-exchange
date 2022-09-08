@@ -22,24 +22,31 @@ export class AdminPageComponent implements OnInit {
   }
   delete(){
     if(this.comapanyCode){
+      this.SpinnerService.show();
       this.httpService.deleteTheCompanyDetails(this.comapanyCode)
       .subscribe(res=>{
         console.log(res)
         this.authService.setErroMsg("Successfully deleted "+this.comapanyCode);
       })
     }else{
+      this.SpinnerService.hide();
       this.authService.setErroMsg("Enter Comapny Code then Click add button")
     }
+    this.SpinnerService.hide();
   }
   addStock(){
     if(this.comapanyCode1 && this.stockAmount){
+      this.SpinnerService.show();
       this.httpService.addStockPrice(this.stockAmount,this.comapanyCode1)
         .subscribe(res=>{
-          alert(res);
+          this.authService.setErroMsg("Successfully updated  "+this.stockAmount);
         })
     }else{
+      this.SpinnerService.hide();
       this.authService.setErroMsg("Enter Comapny Code and Stock Amount then Click add button")
     }
+    this.SpinnerService.hide();
+
   }
 
 }

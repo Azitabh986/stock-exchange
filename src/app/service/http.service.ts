@@ -75,22 +75,24 @@ export class HttpService {
    const  httpOptions = {
       headers: headers_object
     };
-    return this.httpClient.delete(this.host2+'/api/v1.0/market/stock/get/'+comapnyCode,httpOptions);
+    return this.httpClient.delete(this.host2+'/api/v1.0/market/stock/delete/'+comapnyCode,httpOptions);
   }
   addStockPrice(price:number,comapnyCode:any){
     const temp="Bearer " + sessionStorage.getItem('Bearer')
     var headers_object= new HttpHeaders({
       "Authorization": temp,
       "Access-Control-Allow-Methods":"'GET,POST,OPTIONS,DELETE,PUT",
-      'Content-Type': 'application/json'
+      "Content-Type":"application/json"
     }
     )
-  
-    console.log(headers_object)
+    const request={
+      stockPrice:price
+    }
    const  httpOptions = {
       headers: headers_object
     };
-    return this.httpClient.post(this.host2+'/api/v1.0/market/stock/get/'+comapnyCode,JSON.stringify(price),httpOptions);
+    console.log(request)
+    return this.httpClient.post(this.host2+'/api/v1.0/market/stock/add/'+comapnyCode,request,httpOptions);
   }
 
   

@@ -20,7 +20,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     console.log("Error",next,'request',request)
     return next.handle(request)
     .pipe(
-      retry(1),
       catchError((error: HttpErrorResponse) => {
         console.log(JSON.stringify(error))
           if(error.status==400){
